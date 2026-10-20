@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>АвтоМаркет Казахстан — объявления автомобилей</title>
+  <style>
+    :root {
+      --bg: #f3f5f8;
+      --surface: #ffffff;
+      --text: #202633;
+      --muted: #687386;
+      --accent: #1769e0;
+      --accent-dark: #1052b4;
+      --border: #e2e7ef;
+      --radius: 16px;
+      --shadow: 0 8px 28px rgba(28, 42, 66, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-dark); }
+    img { display: block; max-width: 100%; }
+
+    .site-header {
+      color: white;
+      background:
+        linear-gradient(115deg, rgba(10, 25, 48, .94), rgba(18, 75, 139, .84)),
+        url("автосалон2.jpg") center/cover;
+    }
+    .topbar {
+      width: min(1180px, calc(100% - 40px));
+      margin: auto;
+      padding: 22px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { margin: 0; font-size: 1.35rem; letter-spacing: .4px; }
+    .brand span { color: #8ec5ff; }
+    .nav { display: flex; gap: 22px; flex-wrap: wrap; }
+    .nav a { color: #eef6ff; font-weight: 600; }
+    .hero {
+      width: min(1180px, calc(100% - 40px));
+      margin: auto;
+      padding: 48px 0 70px;
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: #a9d3ff;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .hero h2 {
+      max-width: 760px;
+      margin: 0 0 16px;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1.1;
+    }
+    .hero p:last-child { max-width: 680px; color: #e0eaf6; }
+
+    .layout {
+      width: min(1180px, calc(100% - 40px));
+      margin: 28px auto 48px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 24px;
+      align-items: start;
+    }
+    .main-column { display: grid; gap: 24px; min-width: 0; }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+    .panel h2, .panel h3 { margin-top: 0; }
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .section-heading h2 { margin: 0; }
+    .muted { color: var(--muted); }
+
+    .brands {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .brand-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .brand-card:hover {
+      transform: translateY(-2px);
+      border-color: #a8c9f7;
+      box-shadow: 0 6px 16px rgba(23, 105, 224, .10);
+    }
+    .brand-card img {
+      width: 48px;
+      height: 38px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .brand-name { display: block; font-weight: 700; }
+    .count { display: block; color: var(--muted); font-size: .82rem; }
+
+    .car-list { display: grid; gap: 16px; }
+    .car-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--text);
+    }
+    .car-item img {
+      width: 100px;
+      height: 68px;
+      object-fit: cover;
+      border-radius: 9px;
+      background: #edf0f5;
+    }
+    .car-item span { display: block; font-weight: 700; }
+    .car-item small { color: var(--muted); }
+
+    .register-panel { position: sticky; top: 18px; }
+    .register-panel h2 { margin-bottom: 4px; }
+    .register-form { display: grid; gap: 10px; margin-top: 18px; }
+    .register-form label { font-size: .9rem; font-weight: 700; }
+    .register-form input {
+      width: 100%;
+      padding: 12px 13px;
+      border: 1px solid #d5dce7;
+      border-radius: 9px;
+      background: #fbfcfe;
+      font: inherit;
+    }
+    .register-form input:focus {
+      outline: 3px solid rgba(23, 105, 224, .15);
+      border-color: var(--accent);
+    }
+    .button {
+      display: inline-block;
+      border: 0;
+      border-radius: 9px;
+      padding: 12px 16px;
+      background: var(--accent);
+      color: white;
+      font: inherit;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      transition: background .18s ease, transform .18s ease;
+    }
+    .button:hover { background: var(--accent-dark); color: white; }
+    .button:active { transform: translateY(1px); }
+    .form-note { margin: 0; color: var(--muted); font-size: .82rem; }
+    .form-note a { text-decoration: underline; }
+
+    .ads-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .ad-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+    }
+    .ad-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      background: #edf0f5;
+    }
+    .ad-card a { display: block; color: var(--text); }
+    .ad-card strong { display: block; padding: 12px; }
+
+    .site-footer {
+      padding: 26px 20px;
+      color: #c8d4e4;
+      background: #111d2d;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .register-panel { position: static; }
+      .brands { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 600px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .hero { padding: 34px 0 48px; }
+      .layout { width: min(100% - 24px, 1180px); margin-top: 14px; gap: 14px; }
+      .panel { padding: 18px; }
+      .brands, .ads-grid { grid-template-columns: 1fr; }
+      .nav { gap: 14px; }
+      .ad-card img { height: 190px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="home">
+    <div class="topbar">
+      <h1 class="brand">Авто<span>Маркет</span> KZ</h1>
+      <nav class="nav" aria-label="Главная навигация">
+        <a href="#home">Главная</a>
+        <a href="#brands">Марки авто</a>
+        <a href="#ads">Объявления</a>
+        <a href="#account">Аккаунт</a>
+      </nav>
+    </div>
+    <div class="hero">
+      <p class="eyebrow">Автомобильный рынок Казахстана</p>
+      <h2>Найди автомобиль, который подходит именно тебе</h2>
+      <p>Сравнивай марки, изучай объявления и ищи выгодные предложения на рынке автомобилей.</p>
+    </div>
+  </header>
+
+  <main class="layout">
+    <div class="main-column">
+      <section class="panel" id="brands">
+        <div class="section-heading">
+          <h2>Выбор автомобиля по марке</h2>
+          <span class="muted">Популярные марки</span>
+        </div>
+        <p class="muted">Выбери марку, чтобы перейти к объявлениям.</p>
+
+        <div class="brands">
+          <a class="brand-card" href="/cars/audi/">
+            <img src="https://hdpic.club/uploads/posts/2021-12/1639340487_1-hdpic-club-p-audi-r8-1.png" alt="Audi">
+            <span><span class="brand-name">Audi</span><small class="count">6 264 объявления</small></span>
+          </a>
+          <a class="brand-card" href="/cars/baic/">
+            <img src="https://nalog-avto.ru/wp-content/uploads/2023/08/BAIC-BJ40.webp" alt="BAIC">
+            <span><span class="brand-name">BAIC</span><small class="count">67 объявлений</small></span>
+          </a>
+          <a class="brand-card" href="/cars/bmw/">
+            <img src="https://murmansk.explorer-russia.ru/gallery/auto/modification/216.jpg" alt="BMW">
+            <span><span class="brand-name">BMW</span><small class="count">5 502 объявления</small></span>
+          </a>
+          <a class="brand-card" href="/cars/byd/">
+            <img src="https://static.tildacdn.com/tild3865-3161-4130-b863-383562376335/1400x0_1_q95_autohom.jpg" alt="BYD">
+            <span><span class="brand-name">BYD</span><small class="count">55 объявлений</small></span>
+          </a>
+          <a class="brand-card" href="/cars/bentley/">
+            <span><span class="brand-name">Bentley</span><small class="count">56 объявлений</small></span>
+          </a>
+          <a class="brand-card" href="/cars/cadillac/">
+            <span><span class="brand-name">Cadillac</span><small class="count">258 объявлений</small></span>
+          </a>
+          <a class="brand-card" href="/cars/changan/">
+            <span><span class="brand-name">Changan</span><small class="count">69 объявлений</small></span>
+          </a>
+          <a class="brand-card" href="/cars/chery/">
+            <span><span class="brand-name">Chery</span><small class="count">261 объявление</small></span>
+          </a>
+          <a class="brand-card" href="/cars/chevrolet/">
+            <span><span class="brand-name">Chevrolet</span><small class="count">3 770 объявлений</small></span>
+          </a>
+          <a class="brand-card" href="/cars/chrysler/">
+            <span><span class="brand-name">Chrysler</span><small class="count">212 объявлений</small></span>
+          </a>
+          <a class="brand-card" href="/cars/citroen/">
+            <span><span class="brand-name">Citroen</span><small class="count">57 объявлений</small></span>
+          </a>
+        </div>
+      </section>
+
+      <section class="panel" id="ads">
+        <div class="section-heading">
+          <h2>Рекомендуемые объявления</h2>
+          <span class="muted">Подборка автомобилей</span>
+        </div>
+        <div class="ads-grid">
+          <article class="ad-card">
+            <a href="https://www.avito.ru/krasnodar/avtomobili/mazda_3_2008_2655719578">
+              <img src="1.kLCiGba6PFmUsP5cjn-8umK6Ol0WOjSbE7o4UR6yPg.jpg" alt="Mazda 3 2008 года">
+              <strong>Mazda 3, 2008</strong>
+            </a>
+          </article>
+          <article class="ad-card">
+            <a href="https://www.avito.ru/razvilka/avtomobili/mercedes-benz_m-klass_2007_2621485604">
+              <img src="1.L6JMJba6g0t6jEFOHgVvtI6GhU_4BouJ_YaHQ_COgQ.jpg" alt="Mercedes-Benz M-класс 2007 года">
+              <strong>Mercedes-Benz M-класс, 2007</strong>
+            </a>
+          </article>
+          <article class="ad-card">
+            <a href="https://www.avito.ru/zabaykalskiy_kray_yasnogorsk/avtomobili/ford_focus_2012_2633012690">
+              <img src="1.X1Zvd7a6879Z3jG6XQpfHK7U9bvbVPt93tT3t9Pc8Q.jpg" alt="Ford Focus 2012 года">
+              <strong>Ford Focus, 2012</strong>
+            </a>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="panel register-panel" id="account">
+      <h2>Вход в аккаунт</h2>
+      <p class="muted">Войди или создай аккаунт, чтобы продолжить.</p>
+      <form class="register-form" action="#" method="post">
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" placeholder="name@example.com" autocomplete="email" required>
+
+        <label for="password">Пароль</label>
+        <input id="password" type="password" name="password" placeholder="Введите пароль" autocomplete="current-password" required>
+
+        <button class="button" type="submit">Войти</button>
+        <p class="form-note">Создавая аккаунт, вы соглашаетесь с <a href="ПолитикаиКонф.html">политикой конфиденциальности</a>.</p>
+        <p class="form-note">Нет аккаунта? <a href="registration.html">Зарегистрируйтесь</a>.</p>
+      </form>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    © 2026 АвтоМаркет KZ · Объявления автомобилей
+  </footer>
+</body>
+</html>
